@@ -5,6 +5,7 @@ private [
 	,"_loadoutVariables"
 ];
 if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
+params ["_player"];
 /*
  * Author: Belbo
  *
@@ -221,6 +222,14 @@ switch (_par_customWeap) do {
 		//RHS Army
 		_primaryweapon = ["rhs_weap_sr25","rhs_weap_sr25_ec","rhs_weap_m14ebrri"];
 		_optic = ["rhsusf_acc_LEUPOLDMK4_2","rhsusf_acc_LEUPOLDMK4_2","rhsusf_acc_LEUPOLDMK4"];
+		call {
+			if ((toUpper worldname) in _var_aridMaps) exitWith {
+				_primaryWeapon append ["rhs_weap_sr25_d","rhs_weap_sr25_ec_d"];
+			};
+			if ((toUpper worldname) in _var_lushMaps) exitWith {
+				_primaryWeapon append ["rhs_weap_sr25_wd","rhs_weap_sr25_ec_wd"];
+			};
+		};
 		_attachments = ["rhsusf_acc_harris_bipod"];
 		_silencer = "rhsusf_acc_SR25S";		//if silencer is added
 		if ( _par_NVGs == 1 ) then { _attachments pushback "rhsusf_acc_M952V"; };
@@ -325,7 +334,6 @@ switch (_par_customUni) do {
 		_headgear = ["BWA3_MICH_Tropen"];
 		if (isClass(configFile >> "CfgPatches" >> "PBW_German_Common")) then {
 			_uniform = ["PBW_Uniform1_tropen","PBW_Uniform3_tropen","PBW_Uniform3K_tropen"];
-			_vest = ["pbw_koppel_grpfhr","pbw_splitter_grpfhr"];
 			_headgear = ["PBW_Helm4_tropen_HBO","PBW_Helm1_tropen_HBO"];
 			_items pushback "PBW_muetze1_tropen";
 		};
@@ -475,7 +483,6 @@ switch (_par_customUni) do {
 
 ///// No editing necessary below this line /////
 
-_player = _this select 0;
 [_player] call ADV_fnc_gear;
 
 true;

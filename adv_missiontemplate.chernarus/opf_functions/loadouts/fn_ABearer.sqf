@@ -5,6 +5,7 @@ private [
 	,"_loadoutVariables"
 ];
 if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
+params ["_player"];
 /*
  * Author: Belbo
  *
@@ -48,7 +49,7 @@ if (worldName == "TANOA" || _par_opfWeap == 20) then {
 };
 
 //primary weapon ammo (if a primary weapon is given) and how many tracer mags - (integer)
-_primaryweaponAmmo = [8,0];
+_primaryweaponAmmo = [10,0];
 _additionalAmmo = [12,"30Rnd_65x39_caseless_green",true];
 _additionalAmmo1 = [3,"150Rnd_762x54_Box_Tracer",true];
 _additionalAmmo2 = [12,"1Rnd_HE_Grenade_shell",true];
@@ -340,7 +341,6 @@ switch (_par_opfUni) do {
 
 ///// No editing necessary below this line /////
 
-_player = _this select 0;
 [_player] call ADV_fnc_gear;
 
 true;

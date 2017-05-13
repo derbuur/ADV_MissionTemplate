@@ -92,6 +92,7 @@ ADV_veh_car = ADV_veh_MRAPS+ADV_veh_MRAPsHMG+ADV_veh_MRAPsGMG;
 ADV_veh_light = ADV_veh_ATVs+ADV_veh_UGVs+ADV_veh_UGVs_repair+ADV_veh_car+ADV_veh_transport+ADV_veh_logistic_fuel+ADV_veh_logistic_ammo+ADV_veh_logistic_repair+ADV_veh_logistic_medic;
 
 ADV_veh_all = ADV_veh_light+ADV_veh_armored+ADV_veh_air;
+publicVariable "ADV_veh_all";
 
 //lobby params:
 private _par_assets_cars = missionNamespace getVariable ["ADV_par_Assets_cars",1];
@@ -351,11 +352,13 @@ switch ( _par_modHeavyAssets ) do {
 			};
 		};
 	};
-	//Stryker Pack woodland
-	case 4: {};
 	//DAR MaxxPro MRAP
 	case 5: {
 		[ADV_veh_heavys,["DAR_MaxxProDeploy","DAR_MaxxProDeploy","DAR_MaxxPro","DAR_MaxxProDXM","DAR_MaxxProPlus"],west] call ADV_fnc_changeVeh;
+	};
+	//adv_retex gorgon
+	case 4: {
+		[ADV_veh_heavys,["adv_retex_b_gorgon_f"],west] call ADV_fnc_changeVeh;
 	};
 	//stv warrior
 	case 6: {
@@ -451,7 +454,13 @@ switch ( _par_modTankAssets ) do {
 	//BWmod Leopard woodland
 	case 2: {};
 	//stv retextures
-	case 3: {[ADV_veh_tanks,["Steve_MBT_Kuma"],west] call ADV_fnc_changeVeh;};
+	case 3: {
+		if (isClass(configFile >> "CfgPatches" >> "adv_retex")) then {
+			[ADV_veh_tanks,["adv_retex_b_kuma_f"],west] call ADV_fnc_changeVeh;
+		} else {
+			[ADV_veh_tanks,["Steve_MBT_Kuma"],west] call ADV_fnc_changeVeh;
+		};
+	};
 	//RHS m109
 	case 4: {
 		[] call {

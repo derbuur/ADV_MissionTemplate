@@ -43,7 +43,7 @@ private _heading = call {
 	if (true) exitWith {0};
 };
 
-private _skill = [0.5,0.9,0.65];
+private _skill = [0.7,0.9,0.65];
 if (_side == civilian) then { _skill = [0.0,0.0,0.0]; };
 
 private _withVehicles = false;
@@ -82,5 +82,6 @@ call {
 		{ _x disableAI "AUTOCOMBAT"; _x setUnitPos "UP"; } count (units _grp);
 	};
 };
+//_grp enableDynamicSimulation true;
 
 _grp;

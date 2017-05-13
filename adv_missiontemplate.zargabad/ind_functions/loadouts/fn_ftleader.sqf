@@ -5,6 +5,7 @@ private [
 	,"_loadoutVariables"
 ];
 if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
+params ["_player"];
 /*
  * Author: Belbo
  *
@@ -43,7 +44,7 @@ if ( _par_NVGs == 2 ) then { _attachments pushback "acc_pointer_IR"; };
 _silencer = ["muzzle_snds_M"];
 
 //primary weapon ammo (if a primary weapon is given) and how many tracer mags - (integer)
-_primaryweaponAmmo = [8,0];		//first number: Amount of magazines, second number: config index of magazine or classname of magazine type.
+_primaryweaponAmmo = [10,0];		//first number: Amount of magazines, second number: config index of magazine or classname of magazine type.
 
 //40mm Grenades - (integer)
 _40mmHeGrenadesAmmo = 0;
@@ -77,7 +78,7 @@ _launcher = "";
 _launcherAmmo = [0,0];		//first number: Amount of magazines, second number: config index of magazine or classname of magazine type.
 
 //binocular - (string)
-_binocular = "Rangefinder";
+_binocular = "Binocular";
 
 //throwables - (integer)
 _grenadeSet = 1;		//contains 2 HE grenades, 1 white and one coloured smoke grenade and 1 red chemlight. Select 0 if you want to define your own grenades.
@@ -272,7 +273,6 @@ switch (_par_indUni) do {
 
 ///// No editing necessary below this line /////
 
-_player = _this select 0;
 if !(toUpper ((str _player) select [4,2]) == "FT") then {
 	_ACE_sprayPaintColor = "NONE";
 };

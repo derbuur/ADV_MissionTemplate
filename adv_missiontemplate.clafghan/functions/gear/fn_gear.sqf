@@ -47,7 +47,7 @@ if ( isClass(configFile >> "CfgPatches" >> "rhs_main") ) then { _NVGoggles appen
 if ( isClass(configFile >> "CfgPatches" >> "UK3CB_BAF_Equipment") ) then { _NVGoggles append ["UK3CB_BAF_HMNVS"]; };
 if ( isClass(configFile >> "CfgPatches" >> "Dsk_lucie_config") ) then { _NVGoggles append ["DSK_NSV"]; };
 if ( isClass(configFile >> "CfgPatches" >> "CUP_Weapons_NVG") ) then { _NVGoggles append ["CUP_NVG_HMNVS","CUP_NVG_PVS7"]; };
-if ( isClass (configFile >> "CfgPatches" >> "task_force_radio") ) then { [] call adv_fnc_tfarSettings };
+//if ( isClass (configFile >> "CfgPatches" >> "task_force_radio") ) then { [] call adv_fnc_tfarSettings };
 private _disposableLaunchers = [];
 if ( isClass(configFile >> "CfgPatches" >> "ACE_disposable") ) then { _disposableLaunchers pushBack "LAUNCH_NLAW_F"; };
 _disposableLaunchers append ["BWA3_PZF3","BWA3_RGW90","STI_M136","CUP_LAUNCH_M136","RHS_WEAP_M136","RHS_WEAP_M136_HEDP","RHS_WEAP_M136_HP","RHS_WEAP_M72A7","RHS_WEAP_RPG26","RHS_WEAP_RSHG2","RHS_WEAP_RPG18"];
@@ -58,6 +58,7 @@ if ( toUpper ([(str _unit),(count str _unit)-5] call BIS_fnc_trimString) isEqual
 	_par_opfSilencers = 2;
 	_giveRiflemanRadio = true;
 	_givePersonalRadio = true;
+	_ACE_m84 = 2;
 	_ACE_isMedic = 1;
 	_ACE_isEngineer = 1;
 	_ACE_isEOD = true;
@@ -82,7 +83,7 @@ if ( _vest isEqualType [] ) then { _vest = selectRandom _vest;};
 _unit addVest _vest;
 if ( _backpack isEqualType [] ) then { _backpack = selectRandom _backpack; };
 private _removeBackpackAfterWeapons = false;
-if ( toUpper _backpack isEqualTo "backpackdummy" ) then { _backpack = "B_Carryall_oli"; _removeBackpackAfterWeapons = true; };
+if ( toUpper _backpack isEqualTo "BACKPACKDUMMY" ) then { _backpack = "B_Carryall_oli"; _removeBackpackAfterWeapons = true; };
 _unit addBackpackGlobal _backpack;
 //adding the ace_gunbag if necessary:
 if ( isClass(configFile >> "CfgPatches" >> "ACE_gunbag") && !isNil "_ace_gunbag") then {
@@ -161,15 +162,16 @@ if (_insignium isEqualTo "") then {
 	[_unit,_insignium] remoteExec ["BIS_fnc_setUnitInsignia",0];
 };
 //weapons
+if ( _binocular isEqualType [] ) then { _binocular = selectRandom _binocular; };
 [_unit,_binocular,1] call BIS_fnc_addWeapon;
 if ( _handgun isEqualType [] ) then { _handgun = selectRandom _handgun; };
 [_unit,_handgun,_handgunAmmo select 0,_handgunAmmo select 1] call BIS_fnc_addWeapon;
 if ( (side (group _unit) isEqualTo west && _par_Silencers > 0) || (side (group _unit) isEqualTo east && _par_opfSilencers > 0) ) then { _itemsHandgun pushback _handgunSilencer; };
 { _unit addHandgunItem _x } count _itemsHandgun;
+if ( _launcher isEqualType [] ) then { _launcher = selectRandom _launcher; };
 if ( (toUpper _launcher) in _disposableLaunchers ) then {
 	_launcherAmmo set [0,1];
 };
-if ( _launcher isEqualType [] ) then { _launcher = selectRandom _launcher; };
 [_unit,_launcher,_launcherAmmo select 0,_launcherAmmo select 1] call BIS_fnc_addWeapon;
 if ( _primaryWeapon isEqualType [] ) then { _primaryWeapon = selectRandom _primaryWeapon; };
 if (_primaryweaponAmmo select 0 > 0) then {

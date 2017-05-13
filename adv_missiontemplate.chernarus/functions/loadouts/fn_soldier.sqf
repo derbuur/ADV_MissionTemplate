@@ -5,6 +5,7 @@ private [
 	,"_loadoutVariables"
 ];
 if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
+params ["_player"];
 /*
  * Author: Belbo
  *
@@ -44,7 +45,7 @@ if ( _par_NVGs == 2 ) then { _attachments pushback "acc_pointer_IR"; };
 _silencer = "muzzle_snds_H";
 
 //primary weapon ammo (if a primary weapon is given) and how many tracer mags - (integer)
-_primaryweaponAmmo = [8,0];		//first number: Amount of magazines, second number: config index of magazine or classname of magazine type.
+_primaryweaponAmmo = [10,0];		//first number: Amount of magazines, second number: config index of magazine or classname of magazine type.
 
 //40mm Grenades - (integer)
 _40mmHeGrenadesAmmo = 0;
@@ -221,6 +222,15 @@ switch (_par_customWeap) do {
 		//RHS ARMY
 		_primaryweapon = ["rhs_weap_m4_carryhandle","rhs_weap_m4_carryhandle_mstock","rhs_weap_m4a1_carryhandle"];
 		_optic = ["rhsusf_acc_ACOG","rhsusf_acc_ACOG3","rhsusf_acc_SpecterDR","rhsusf_acc_SpecterDR","rhsusf_acc_SpecterDR_OD"];
+		call {
+			if ((toUpper worldname) in _var_aridMaps) exitWith {
+				_primaryWeapon append ["rhs_weap_m4a1_blockII_d","rhs_weap_m4a1_d"];
+			};
+			if ((toUpper worldname) in _var_lushMaps) exitWith {
+				_primaryWeapon append ["rhs_weap_m4a1_blockII_wd"];
+			};
+		};
+		_attachments = [""];
 		if ( _par_NVGs == 1 ) then { _attachments = ["rhsusf_acc_M952V"]; };
 		if ( _par_NVGs == 2 ) then { _attachments = ["rhsusf_acc_anpeq15side_bk"]; };
 		_attachments pushBack (["","","","","rhsusf_acc_grip1","rhsusf_acc_grip2","rhsusf_acc_grip2_tan","rhsusf_acc_grip3"] call BIS_fnc_selectRandom);
@@ -327,11 +337,10 @@ switch (_par_customUni) do {
 	case 1: {
 		//BWmod Tropen
 		_uniform = ["BWA3_Uniform_idz_Tropen"];
-		_vest = ["BWA3_Vest_Rifleman1_Tropen"];
+		_vest = ["BWA3_Vest_Rifleman1_Tropen","BWA3_Vest_JPC_Rifleman_Tropen"];
 		_headgear = ["BWA3_MICH_Tropen"];
 		if (isClass(configFile >> "CfgPatches" >> "PBW_German_Common")) then {
 			_uniform = ["PBW_Uniform1_tropen","PBW_Uniform3_tropen","PBW_Uniform3K_tropen"];
-			_vest = ["pbw_splitter_schtz"];
 			_headgear = ["PBW_Helm4_tropen","PBW_Helm1_tropen"];
 			_items pushback "PBW_muetze1_tropen";
 		};
@@ -340,7 +349,7 @@ switch (_par_customUni) do {
 	case 2: {
 		//BWmod Fleck
 		_uniform = ["BWA3_Uniform_idz_Fleck"];
-		_vest = ["BWA3_Vest_Rifleman1_Fleck"];
+		_vest = ["BWA3_Vest_Rifleman1_Fleck","BWA3_Vest_JPC_Rifleman_Fleck"];
 		_headgear = ["BWA3_MICH_Fleck"];
 		if (isClass(configFile >> "CfgPatches" >> "PBW_German_Common")) then {
 			_uniform = ["PBW_Uniform1_fleck","PBW_Uniform3_fleck","PBW_Uniform3K_fleck"];
@@ -463,7 +472,6 @@ switch (_par_customUni) do {
 
 ///// No editing necessary below this line /////
 
-_player = _this select 0;
 [_player] call ADV_fnc_gear;
 
 true;

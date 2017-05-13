@@ -15,8 +15,6 @@
  * Public: Yes
  */
 
-if (!isServer) exitWith {};
-
 //mission variables and parameters:
 private [
 	"_par_customWeap","_par_opfWeap","_par_indWeap","_par_customUni","_par_indUni","_par_opfUni","_par_NVGs","_par_opfNVGs","_par_optics","_par_opfOptics","_par_Silencers","_par_opfSilencers"
@@ -38,9 +36,9 @@ if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
 			_target addWeaponCargoGlobal ["BWA3_Pzf3_Loaded",1];
 			//ammo
 			if (isClass(configFile >> "CfgPatches" >> "hlcweapons_g36") && !(isClass(configFile >> "CfgPatches" >> "adv_hlcG36_bwmod"))) then {
-				_target addMagazineCargoGlobal ["hlc_30rnd_556x45_EPR_G36",24];
+				_target addMagazineCargoGlobal ["hlc_30rnd_556x45_EPR_G36",30];
 			} else {
-				_target addMagazineCargoGlobal ["BWA3_30Rnd_556x45_G36",24];
+				_target addMagazineCargoGlobal ["BWA3_30Rnd_556x45_G36",30];
 			};
 			_target addMagazineCargoGlobal ["BWA3_200Rnd_556x45",4];
 			_target addMagazineCargoGlobal ["BWA3_15Rnd_9x19_P8",8];
@@ -52,7 +50,7 @@ if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
 			_target addWeaponCargoGlobal ["rhs_weap_M136",1];
 			//ammo
 			if !(isClass(configFile >> "CfgPatches" >> "ace_disposable")) then { _target addMagazineCargoGlobal ["rhs_m136_mag",1]; };
-			_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",24];
+			_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",30];
 			_target addMagazineCargoGlobal ["rhsusf_20Rnd_762x51_m118_special_Mag",8];
 			_target addMagazineCargoGlobal ["rhsusf_200Rnd_556x45_soft_pouch",4];
 			if (_par_customWeap == 3) then {
@@ -67,7 +65,7 @@ if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
 			_target addWeaponCargoGlobal ["CUP_launch_M136",1];
 			//ammo
 			_target addMagazineCargoGlobal ["CUP_M136_M",1];
-			_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",24];
+			_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",30];
 			if (_par_customWeap == 5) then {
 				_target addMagazineCargoGlobal ["CUP_20Rnd_762x51_B_M110",8];
 				_target addMagazineCargoGlobal ["CUP_20Rnd_762x51_B_SCAR",8];
@@ -83,7 +81,7 @@ if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
 			_target addWeaponCargoGlobal ["CUP_launch_M136",1];
 			//ammo
 			_target addMagazineCargoGlobal ["CUP_M136_M",1];
-			_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",24];
+			_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",30];
 			_target addMagazineCargoGlobal ["20Rnd_762x51_Mag",7];
 			_target addMagazineCargoGlobal ["CUP_200Rnd_TE4_Red_Tracer_556x45_L110A1",4];
 			_target addMagazineCargoGlobal ["CUP_17Rnd_9x19_glock17",8];
@@ -92,7 +90,7 @@ if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
 			//weapons
 			_target addWeaponCargoGlobal ["UK3CB_BAF_AT4_AP_Launcher",1];
 			//ammo
-			_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",24];
+			_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",30];
 			_target addMagazineCargoGlobal ["UK3CB_BAF_20Rnd",8];
 			_target addMagazineCargoGlobal ["UK3CB_BAF_200Rnd_T",4];
 			_target addMagazineCargoGlobal ["UK3CB_BAF_17Rnd_9mm",8];
@@ -107,8 +105,8 @@ if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
 				if !(isClass(configFile >> "CfgPatches" >> "ace_disposable")) then { _target addMagazineCargoGlobal ["NLAW_F",1]; };
 			};
 			//ammo
-			_target addMagazineCargoGlobal ["hlc_20rnd_762x51_b_G3",24];
-			_target addMagazineCargoGlobal ["hlc_20rnd_762x51_b_fal",24];
+			_target addMagazineCargoGlobal ["hlc_20rnd_762x51_b_G3",30];
+			_target addMagazineCargoGlobal ["hlc_20rnd_762x51_b_fal",30];
 			_target addMagazineCargoGlobal ["hlc_50rnd_762x51_M_FAL",8];
 			if (isClass(configFile >> "CfgPatches" >> "RH_de_cfg")) then {
 				_target addMagazineCargoGlobal ["RH_7Rnd_45cal_m1911",8];
@@ -123,10 +121,10 @@ if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
 			if !(isClass(configFile >> "CfgPatches" >> "ace_disposable")) then { _target addMagazineCargoGlobal ["NLAW_F",1]; };
 			call {
 				if (_par_customWeap == 20) exitWith {
-					_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",24];
+					_target addMagazineCargoGlobal ["30rnd_556x45_STANAG",30];
 					_target addMagazineCargoGlobal ["200Rnd_556x45_Box_Red_F",4];
 				};
-				_target addMagazineCargoGlobal ["30Rnd_65x39_caseless_mag",24];
+				_target addMagazineCargoGlobal ["30Rnd_65x39_caseless_mag",30];
 				call {
 					if (isClass(configFile >> "CfgPatches" >> "adv_configsVanilla")) exitWith {
 						_target addMagazineCargoGlobal ["200Rnd_65x39_cased_Box_Tracer_red",4];

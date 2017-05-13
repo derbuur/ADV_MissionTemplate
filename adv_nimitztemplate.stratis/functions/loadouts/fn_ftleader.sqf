@@ -5,6 +5,7 @@ private [
 	,"_loadoutVariables"
 ];
 if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
+params ["_player"];
 /*
  * Author: Belbo
  *
@@ -44,7 +45,7 @@ if ( _par_NVGs == 2 ) then { _attachments pushback "acc_pointer_IR"; };
 _silencer = "muzzle_snds_H";		//if silencer is added
 
 //primary weapon ammo (if a primary weapon is given) and how many tracer mags - (integer)
-_primaryweaponAmmo = [8,0];		//first number: Amount of magazines, second number: config index of magazine or classname of magazine type.
+_primaryweaponAmmo = [10,0];		//first number: Amount of magazines, second number: config index of magazine or classname of magazine type.
 
 //40mm Grenades - (arrays)
 _40mmHeGrenadesAmmo = 0;
@@ -78,7 +79,7 @@ _launcher = "";
 _launcherAmmo = [0,0];		//first number: Amount of magazines, second number: config index of magazine or classname of magazine type.
 
 //binocular - (string)
-_binocular = "Rangefinder";
+_binocular = "Binocular";
 
 //throwables - (integer)
 _grenadeSet = 1;		//contains 2 HE grenades, 1 white and one coloured smoke grenade and 1 red chemlight. Select 0 if you want to define your own grenades.
@@ -221,6 +222,14 @@ switch (_par_customWeap) do {
 		//RHS ARMY
 		_primaryweapon = ["rhs_weap_m4_carryhandle","rhs_weap_m4_carryhandle_mstock","rhs_weap_m4a1_carryhandle"];
 		_optic = ["rhsusf_acc_ACOG","rhsusf_acc_ACOG3","rhsusf_acc_SpecterDR","rhsusf_acc_SpecterDR","rhsusf_acc_SpecterDR_OD"];
+		call {
+			if ((toUpper worldname) in _var_aridMaps) exitWith {
+				_primaryWeapon append ["rhs_weap_m4a1_blockII_d","rhs_weap_m4a1_d"];
+			};
+			if ((toUpper worldname) in _var_lushMaps) exitWith {
+				_primaryWeapon append ["rhs_weap_m4a1_blockII_wd"];
+			};
+		};
 		_attachments = [""];
 		if ( _par_NVGs == 1 ) then { _attachments pushback "rhsusf_acc_M952V"; };
 		if ( _par_NVGs == 2 ) then { _attachments pushback "rhsusf_acc_anpeq15side_bk"; };
@@ -328,11 +337,10 @@ switch (_par_customUni) do {
 	case 1: {
 		//BWmod
 		_uniform = ["BWA3_Uniform_idz_Tropen"];
-		_vest = ["BWA3_Vest_Leader_Tropen"];
+		_vest = ["BWA3_Vest_Leader_Tropen","BWA3_Vest_Leader_Tropen","BWA3_Vest_JPC_Leader_Tropen","BWA3_Vest_JPC_Radioman_Tropen"];
 		_headgear = ["BWA3_OpsCore_Tropen_Camera"];
 		if (isClass(configFile >> "CfgPatches" >> "PBW_German_Common")) then {
 			_uniform = ["PBW_Uniform1_tropen","PBW_Uniform3_tropen","PBW_Uniform3K_tropen"];
-			_vest = ["pbw_splitter_grpfhr"];
 			_headgear = ["PBW_Helm4_tropen","PBW_Helm1_tropen"];
 			_items pushback "PBW_muetze1_tropen";
 		};
@@ -341,7 +349,7 @@ switch (_par_customUni) do {
 	case 2: {
 		//BWmod
 		_uniform = ["BWA3_Uniform_idz_Fleck"];
-		_vest = ["BWA3_Vest_Leader_Fleck"];
+		_vest = ["BWA3_Vest_Leader_Fleck","BWA3_Vest_Leader_Fleck","BWA3_Vest_JPC_Leader_Fleck","BWA3_Vest_JPC_Radioman_Fleck"];
 		_headgear = ["BWA3_OpsCore_Fleck_Camera"];
 		if (isClass(configFile >> "CfgPatches" >> "PBW_German_Common")) then {
 			_uniform = ["PBW_Uniform1_fleck","PBW_Uniform3_fleck","PBW_Uniform3K_fleck"];
@@ -464,7 +472,6 @@ switch (_par_customUni) do {
 
 ///// No editing necessary below this line /////
 
-_player = _this select 0;
 if !(toUpper ((str _player) select [0,2]) == "FT") then {
 	_ACE_sprayPaintColor = "NONE";
 };

@@ -5,6 +5,7 @@ private [
 	,"_loadoutVariables"
 ];
 if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
+params ["_player"];
 /*
  * Author: Belbo
  *
@@ -75,7 +76,7 @@ _launcher = "";
 _launcherAmmo = [0,0];		//first number: Amount of magazines, second number: config index of magazine or classname of magazine type.
 
 //binocular - (string)
-_binocular = "Binocular";
+_binocular = "";
 
 //throwables - (integer)
 _grenadeSet = 1;		//contains 2 HE grenades, 1 white and one coloured smoke grenade and 1 red chemlight. Select 0 if you want to define your own grenades.
@@ -183,7 +184,7 @@ _ACE_HandFlare_Yellow = 0;
 _ACE_isMedic = 0;		//0 = no medic; 1 = medic; 2 = doctor;
 _ACE_isEngineer = 0;	//0 = no specialist; 1 = engineer; 2 = repair specialist;
 _ACE_isEOD = false;
-_ACE_isPilot = true;
+_ACE_isPilot = false;
 
 //Tablet-Items
 _tablet = false;
@@ -266,7 +267,7 @@ switch (_par_indUni) do {
 	};
 };
 
-switch (toUpper ([str (_this select 0),3,13] call BIS_fnc_trimString)) do {
+switch (toUpper ([str _player,3,13] call BIS_fnc_trimString)) do {
 	case "DRIVER_LEA": {
 		_binocular = "Rangefinder";
 	};
@@ -274,7 +275,6 @@ switch (toUpper ([str (_this select 0),3,13] call BIS_fnc_trimString)) do {
 
 ///// No editing necessary below this line /////
 
-_player = _this select 0;
 [_player] call ADV_fnc_gear;
 CL_IE_Module_Enabled = true;
 

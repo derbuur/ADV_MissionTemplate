@@ -1,40 +1,46 @@
-class ADV
-{	
-	tag = "ADV";
-	class variables
+class adv
+{
+	tag = "adv";
+	class init
 	{
-		class collectCrates {};
-		class collectFlags {};
-		class loadoutVariables {};
-		class parVariables { preInit = 1; };
-		class variables { preInit = 1; };
+		class initOrganizer { preInit = 1; };
+		class init {};
+		class initPlayerLocal {};
+		class initServer {};
 	};
 	class settings
 	{
-		class acreSettings { preInit = 1; postInit = 1; };
-		class tfarSettings { preInit = 1; };
+		class acreSettings {};
+		class tfarSettings {};
 	};
 	class preInit
 	{
-		class missionMarkers { preInit = 1; };
-		class sideMarkers { preInit = 1; };
-		class fhqTT {
+		class collectCrates {};
+		class collectFlags {};
+		class parVariables {};
+		class variables {};
+		class missionMarkers {};
+		class sideMarkers {};
+		class fhqTT
+		{
 			file = "scripts\fhqtt2.sqf";
 			preInit = 1;
 		};
-		class init_upsmon {
+		class init_upsmon
+		{
 			file = "scripts\Init_UPSMON.sqf";
 			preInit = 1;
 		};
-		class credits { file = "ADV_credits.sqf";preInit = 1; };
+		class credits { file = "mission\ADV_credits.sqf";preInit = 1; };
 		class tasks { file = "mission\ADV_tasks.sqf";preInit = 1; };
 		class briefing { file = "mission\ADV_briefing.sqf";preInit = 1; };
 		class leaderBriefing { file = "mission\ADV_leaderBriefing.sqf"; preInit = 1; };
 	};
 	class shared
 	{
+		class jammer {};
 		class radioRelay {};
-		class weather { postInit = 1; };
+		class weather {};
 	};
 	class server_internal
 	{
@@ -43,7 +49,7 @@ class ADV
 		class addVehicleLoad {};
 		class changeVeh {};
 		class disableVehSelector {};
-		class manageVeh { postInit = 1; };
+		class manageVeh {};
 		class nil {};
 		class rhsDecals {};
 	};
@@ -56,10 +62,11 @@ class ADV
 		class createZeus {};
 		class disableTI {};
 		class disableVeh {};
+		class findNearestObject {};
 		class flare {};
 		class getOppPos {};
 		class HCobjects {};
-		class IEDhandler { postInit = 1; };
+		class IEDhandler {};
 		class lockVeh {};
 		class paraBomb {};
 		class paraCrate {};
@@ -113,6 +120,7 @@ class ADV
 		class spawnFire {};
 		class speedLimiter {};
 		class teleport {};
+		class timedHint {};
 		class undercover {};
 	};
 	class gear_internal
@@ -124,6 +132,7 @@ class ADV
 		class applyLoadout {};
 		class dialogGearInit {};
 		class dialogLoadout {};
+		class loadoutVariables {};
 	};
 	class gear
 	{
@@ -136,6 +145,7 @@ class ADV
 		class CSW {};
 		class gear {};
 		class insignia {};
+		class LRBackpack {};
 		class setChannels {};
 		class setFaction {};
 		class setFrequencies {};
@@ -237,5 +247,13 @@ class SA
 	class advancedTowing
 	{
 		class advancedTowingInit {file = "scripts\fn_advancedTowingInit.sqf"; postInit = 1;};
+	};
+};
+class whk
+{
+	tag = "whk";
+	class headlessClient
+	{
+		class headless {file = "scripts\WerthlesHeadless.sqf";};
 	};
 };

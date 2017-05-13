@@ -5,6 +5,7 @@ private [
 	,"_loadoutVariables"
 ];
 if (isNil "_loadoutVariables") then {call adv_fnc_loadoutVariables;};
+params ["_player"];
 /*
  * Author: Belbo
  *
@@ -186,7 +187,7 @@ _ACE_HandFlare_White = 0;
 _ACE_HandFlare_Yellow = 0;
 
 //AGM Variables (if AGM is running) - (bool)
-_ACE_isMedic = 1;		//0 = no medic; 1 = medic; 2 = doctor;
+_ACE_isMedic = 2;		//0 = no medic; 1 = medic; 2 = doctor;
 _ACE_isEngineer = 1;	//0 = no specialist; 1 = engineer; 2 = repair specialist;
 _ACE_isEOD = false;
 _ACE_isPilot = false;
@@ -330,12 +331,12 @@ switch (_par_opfUni) do {
 if (missionNamespace getVariable ["_par_noLRRadios",false]) then { _giveBackpackRadio = false };
 if ( isClass(configFile >> "CfgPatches" >> "task_force_radio") && (_par_Radios == 1 || _par_Radios == 3) && _giveBackpackRadio ) then {
 	_backpack = switch (_par_opfUni) do {
-		case 1: {["tf_mr3000_rhs"]};
-		case 2: {["tf_mr3000_rhs"]};
-		case 3: {["tf_mr3000_rhs"]};
-		case 4: {["tf_mr3000_rhs"]};
+		case 1: {["tfar_mr3000_rhs"]};
+		case 2: {["tfar_mr3000_rhs"]};
+		case 3: {["tfar_mr3000_rhs"]};
+		case 4: {["tfar_mr3000_rhs"]};
 		case 5: {[""]};
-		default {["tf_mr3000_rhs"]};
+		default {["tfar_mr3000_rhs"]};
 	};
 };
 if ( isClass (configFile >> "CfgPatches" >> "acre_main") && (_par_Radios == 1 || _par_Radios == 3) && _giveBackpackRadio ) then {
@@ -353,7 +354,6 @@ if ( isClass (configFile >> "CfgPatches" >> "acre_main") && (_par_Radios == 1 ||
 
 ///// No editing necessary below this line /////
 
-_player = _this select 0;
 [_player] call ADV_fnc_gear;
 CL_IE_Module_Enabled = true;
 
